@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infográfico: Caldeiraria Industrial no Brasil - Tendências e Oportunidades</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F9FAFB; /* Light Background Base */
+            color: #1F2937; /* Dark Text */
+        }
+        .card {
+            background-color: #FFFFFF; /* White */
+            border-radius: 0.75rem; /* rounded-xl */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1); /* shadow-lg */
+            padding: 1.5rem; /* p-6 */
+            margin-bottom: 2rem; /* mb-8 */
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px; /* Base height, use Tailwind for responsive aspects like sm:h-auto */
+            max-height: 450px;
+        }
+        .stat-big-number {
+            font-size: 3rem; /* text-5xl */
+            font-weight: 700; /* font-bold */
+            color: #0A74DA; /* Primary Blue */
+        }
+        .section-title {
+            font-size: 2.25rem; /* text-4xl */
+            font-weight: 700; /* font-bold */
+            color: #0A74DA; /* Primary Blue */
+            margin-bottom: 1rem; /* mb-4 */
+            text-align: center;
+        }
+        .section-subtitle {
+            font-size: 1.125rem; /* text-lg */
+            color: #4B5563; /* gray-600 */
+            margin-bottom: 2rem; /* mb-8 */
+            text-align: center;
+            max-width: 48rem; /* max-w-2xl */
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .accent-text {
+            color: #FACC15; /* Accent Yellow */
+            font-weight: 600; /* font-semibold */
+        }
+        .primary-button {
+            background-color: #0A74DA; /* Primary Blue */
+            color: #FFFFFF; /* White */
+            padding: 0.75rem 1.5rem; /* py-3 px-6 */
+            border-radius: 0.5rem; /* rounded-lg */
+            font-weight: 600; /* font-semibold */
+            text-align: center;
+            display: inline-block;
+            transition: background-color 0.3s ease;
+        }
+        .primary-button:hover {
+            background-color: #085EAF; /* Darker Primary Blue */
+        }
+        .flowchart-step {
+            background-color: #E0F2FE; /* light blue bg for steps */
+            border: 2px solid #0A74DA; /* Primary Blue border */
+            color: #1F2937;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            font-weight: 500;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .flowchart-arrow {
+            font-size: 2rem;
+            color: #0A74DA; /* Primary Blue */
+            align-self: center;
+        }
+        .icon-list-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.75rem;
+            font-size: 1.125rem; /* text-lg */
+        }
+        .icon-list-item span:first-child {
+            font-size: 1.5rem; /* text-2xl for icon */
+            margin-right: 0.75rem; /* mr-3 */
+            color: #14B8A6; /* Secondary Teal */
+        }
+        .map-container {
+            border: 2px solid #14B8A6; /* Secondary Teal */
+            padding: 1rem;
+            border-radius: 0.5rem;
+            background-color: #F0FDFA; /* Light teal background */
+        }
+        .map-state {
+            background-color: #A7F3D0; /* Lighter green/teal for states */
+            border: 1px solid #14B8A6;
+            padding: 0.5rem;
+            margin: 0.25rem;
+            border-radius: 0.25rem;
+            text-align: center;
+            font-weight: 500;
+        }
+        .map-city {
+            background-color: #FACC15; /* Accent Yellow */
+            color: #1F2937;
+            padding: 0.25rem 0.5rem;
+            border-radius: 9999px; /* rounded-full */
+            font-size: 0.875rem; /* text-sm */
+            margin-top: 0.25rem;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- 
+        Infographic Plan Summary:
+        1. Hero: Title, Hook.
+        2. Section 1: "Caldeiraria Industrial" Landscape - Definition, Key Market Segments (Icon List).
+        3. Section 2: Key Client Industries & Demands - Top Client Industries (Bar Chart), Products in Demand (Icon List).
+        4. Section 3: Southern Powerhouse - Map of Southern Brazil (HTML/CSS), Key Stat.
+        5. Section 4: SME Challenges & Opportunities - Fluctuating Demand, Digital Marketing Gap, High-Value Projects (Icons + Text).
+        6. Section 5: The Solution: Specialized Lead Generation - Service Pillars Flowchart (HTML/CSS).
+        7. Section 6: Why This Works: B2B Digital Marketing Insights - Key Stats (Big Numbers).
+        8. Section 7: The Offer: Driving Growth - Focus on ROI, Call to Action.
+        Color Palette Name: "Dynamic Industrial Growth Palette"
+        (Primary Blue: #0A74DA, Secondary Teal: #14B8A6, Accent Yellow: #FACC15, Dark Text: #1F2937, Light Background: #F9FAFB, Card Background: #FFFFFF)
+        Confirmation: NEITHER Mermaid JS NOR SVG were used anywhere in this output. All graphics are Chart.js (Canvas) or HTML/CSS with Unicode characters.
+    -->
+
+    <!-- 
+        Visualization Choices Summary:
+        1. Market Segments:
+           - Data Point: Key segments of "Caldeiraria Industrial".
+           - Goal: Compare/Organize.
+           - Chosen Visualization: Icon List (HTML/CSS with Unicode).
+           - Justification: Visually distinct categories; no quantitative data for chart proportions.
+           - Library/Method: HTML/CSS, Unicode. NO SVG.
+        2. Key Client Industries:
+           - Data Point: Top client industries for metalwork.
+           - Goal: Compare.
+           - Chosen Visualization: Horizontal Bar Chart (Chart.js).
+           - Justification: Effective for comparing categorical data (industries). Values are illustrative ranks.
+           - Library/Method: Chart.js (Canvas). NO SVG.
+        3. Products in Demand:
+           - Data Point: Examples of common metalwork products.
+           - Goal: Inform.
+           - Chosen Visualization: Icon List (HTML/CSS with Unicode).
+           - Justification: Quick, visual overview of diverse products.
+           - Library/Method: HTML/CSS, Unicode. NO SVG.
+        4. Southern Brazil Map:
+           - Data Point: Geographic focus on Southern Brazil.
+           - Goal: Change (Location).
+           - Chosen Visualization: Simplified map representation (HTML/CSS).
+           - Justification: Visualizes regional concentration.
+           - Library/Method: HTML/CSS with Tailwind. NO SVG.
+        5. SME Challenges/Opportunities:
+           - Data Point: Key challenges (seasonality, digital gap) and opportunity (high-value projects).
+           - Goal: Inform.
+           - Chosen Visualization: Icon + Text callouts.
+           - Justification: Clear, concise presentation of key points.
+           - Library/Method: HTML/CSS, Unicode. NO SVG.
+        6. Lead Generation Service Pillars Flowchart:
+           - Data Point: Core components of the proposed service.
+           - Goal: Organize (Process).
+           - Chosen Visualization: HTML/CSS based flowchart.
+           - Justification: Clearly shows the service process and value flow.
+           - Library/Method: HTML/CSS with Tailwind. NO SVG, NO MERMAID JS.
+        7. B2B Digital Marketing Stats:
+           - Data Point: Key statistics on B2B digital marketing effectiveness.
+           - Goal: Inform.
+           - Chosen Visualization: "Single Big Number" callouts.
+           - Justification: Makes important statistics prominent and easily digestible.
+           - Library/Method: HTML/CSS with Tailwind. NO SVG.
+    -->
+
+    <header class="bg-gradient-to-r from-[#0A74DA] to-[#085EAF] text-white py-16 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold mb-6">Desbloqueando o Crescimento: O Mercado de Caldeiraria Industrial no Brasil</h1>
+            <p class="text-xl sm:text-2xl mb-8">Insights Estratégicos para Geração de Leads e Inovação de Serviços em um Setor de Alto Potencial.</p>
+            <div class="text-2xl font-semibold bg-white/20 backdrop-blur-sm p-4 rounded-lg inline-block">
+                <span class="text-yellow-300">Oportunidade Chave:</span> Maturidade Digital Industrial (6.07) vs. Média de Mercado (6.67)
+            </div>
+            <p class="mt-4 text-lg">Esta lacuna representa uma chance clara para serviços especializados elevarem a presença online e a captação de clientes para PMEs de caldeiraria.</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+        <section id="landscape" class="mb-16">
+            <h2 class="section-title">O Cenário da Caldeiraria Industrial</h2>
+            <p class="section-subtitle">A Caldeiraria Industrial no Brasil é um setor vital que abrange a fabricação, montagem e manutenção de diversas estruturas e equipamentos metálicos, utilizando predominantemente aço carbono e aço inoxidável. Este setor é crucial para a infraestrutura e produção industrial do país, focando em soluções customizadas e de alta especificação.</p>
+            
+            <div class="card">
+                <h3 class="text-2xl font-semibold mb-6 text-center text-[#14B8A6]">Principais Segmentos do Mercado</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="icon-list-item p-4 bg-gray-50 rounded-lg shadow"><span>⚙️</span> Caldeiraria Leve (peças menores, suportes)</div>
+                    <div class="icon-list-item p-4 bg-gray-50 rounded-lg shadow"><span>🏗️</span> Caldeiraria Pesada (grandes estruturas, plataformas)</div>
+                    <div class="icon-list-item p-4 bg-gray-50 rounded-lg shadow"><span>🏭</span> Caldeiraria Industrial (caldeiras, tanques, silos)</div>
+                    <div class="icon-list-item p-4 bg-gray-50 rounded-lg shadow"><span>🚢</span> Caldeiraria Naval (construção e reparo naval)</div>
+                    <div class="icon-list-item p-4 bg-gray-50 rounded-lg shadow"><span>🛠️</span> Caldeiraria de Manutenção (reparos e manutenção)</div>
+                    <div class="icon-list-item p-4 bg-gray-50 rounded-lg shadow"><span>🔩</span> Caldeiraria de Equipamentos (equipamentos especializados)</div>
+                    <div class="icon-list-item p-4 bg-gray-50 rounded-lg shadow"><span>🌉</span> Caldeiraria de Estruturas Metálicas (edifícios, pontes)</div>
+                    <div class="icon-list-item p-4 bg-gray-50 rounded-lg shadow"><span>🔥</span> Caldeiraria de Alta Pressão (vasos e tubulações de alta pressão)</div>
+                </div>
+                <p class="mt-6 text-center text-gray-600">Diversas especializações atendem a necessidades específicas de projetos, desde fabricações leves até sistemas de alta pressão, cada uma exigindo diferentes níveis de maquinário, habilidades técnicas e certificações.</p>
+            </div>
+        </section>
+
+        <section id="client-industries" class="mb-16">
+            <h2 class="section-title">Impulsionando o Brasil: Principais Indústrias Clientes</h2>
+            <p class="section-subtitle">Uma vasta gama de setores industriais depende da caldeiraria para suas operações, desde a infraestrutura energética até componentes automotivos e equipamentos para o agronegócio. A demanda varia de grandes projetos complexos a pedidos repetitivos de componentes especializados.</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                <div class="card">
+                    <h3 class="text-2xl font-semibold mb-4 text-center text-[#14B8A6]">Setores com Maior Demanda por Caldeiraria</h3>
+                    <div class="chart-container h-96 md:h-[450px]">
+                        <canvas id="clientIndustriesChart"></canvas>
+                    </div>
+                    <p class="mt-4 text-sm text-gray-500 text-center">Nota: A altura das barras é ilustrativa da importância e frequência de menção no relatório de pesquisa.</p>
+                </div>
+
+                <div class="card">
+                    <h3 class="text-2xl font-semibold mb-6 text-center text-[#14B8A6]">Produtos Típicos em Demanda</h3>
+                    <ul class="space-y-3">
+                        <li class="icon-list-item"><span>🛢️</span> Vasos de Pressão e Trocadores de Calor</li>
+                        <li class="icon-list-item"><span>♨️</span> Caldeiras Industriais e Equipamentos de Processo</li>
+                        <li class="icon-list-item"><span>🌾</span> Silos, Tanques de Armazenamento (especialmente aço inox para alimentos)</li>
+                        <li class="icon-list-item"><span>🏗️</span> Estruturas de Suporte Metálicas e Mezaninos</li>
+                        <li class="icon-list-item"><span>🔗</span> Tubulações (Spools) e Conexões Industriais</li>
+                        <li class="icon-list-item"><span>💨</span> Dutos Complexos e Sistemas de Exaustão</li>
+                    </ul>
+                    <p class="mt-6 text-gray-600">A demanda abrange desde equipamentos de processo complexos e grandes estruturas até componentes especializados, refletindo a diversidade das necessidades industriais.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="southern-powerhouse" class="mb-16">
+            <h2 class="section-title">A Força Motriz do Sul</h2>
+            <p class="section-subtitle">A Região Sul do Brasil (Paraná, Santa Catarina e Rio Grande do Sul) destaca-se como um polo concentrador de empresas de caldeiraria, impulsionada por uma base industrial robusta e um ecossistema de suporte desenvolvido.</p>
+            <div class="card map-container">
+                <h3 class="text-2xl font-semibold mb-4 text-center text-[#14B8A6]">Concentração Industrial no Sul do Brasil</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                    <div class="map-state">
+                        <p class="font-bold text-lg">Paraná (PR)</p>
+                        <span class="map-city">Curitiba</span> <span class="map-city">Paiçandu</span>
+                    </div>
+                    <div class="map-state">
+                        <p class="font-bold text-lg">Santa Catarina (SC)</p>
+                        <span class="map-city">Joinville</span> <span class="map-city">Jaraguá do Sul</span>
+                    </div>
+                    <div class="map-state">
+                        <p class="font-bold text-lg">Rio Grande do Sul (RS)</p>
+                        <span class="map-city">Porto Alegre</span> <span class="map-city">Gravataí</span> <span class="map-city">Estrela</span>
+                    </div>
+                </div>
+                <p class="mt-6 text-lg text-center text-gray-700">"O Rio Grande do Sul classifica a Fabricação de Obras de Caldeiraria Pesada como 'atividade preferencial' para programas de incentivo, destacando a importância estratégica do setor na região."</p>
+            </div>
+        </section>
+
+        <section id="sme-challenges" class="mb-16">
+            <h2 class="section-title">Desafios e Potencial das PMEs</h2>
+            <p class="section-subtitle">As pequenas e médias empresas de caldeiraria enfrentam desafios únicos, mas também possuem um significativo potencial de crescimento, especialmente ao superar obstáculos na captação de clientes e otimização de suas operações.</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="card text-center">
+                    <div class="text-5xl mb-4">📉</div>
+                    <h3 class="text-xl font-semibold mb-2 text-[#0A74DA]">Demanda Flutuante e Sazonalidade</h3>
+                    <p class="text-gray-600">A dependência de ciclos de indústrias clientes e orçamentos anuais pode levar a variações na demanda, exigindo estratégias de gestão flexíveis.</p>
+                </div>
+                <div class="card text-center">
+                    <div class="text-5xl mb-4">💻</div>
+                    <h3 class="text-xl font-semibold mb-2 text-[#0A74DA]">Lacuna em Marketing Digital</h3>
+                    <p class="text-gray-600">Maturidade digital do setor industrial (Índice <span class="accent-text">6.07</span>) abaixo da média do mercado (<span class="accent-text">6.67</span>), indicando espaço para melhorias na geração de leads online.</p>
+                </div>
+                <div class="card text-center">
+                    <div class="text-5xl mb-4">💰</div>
+                    <h3 class="text-xl font-semibold mb-2 text-[#0A74DA]">Oportunidade em Projetos de Alto Valor</h3>
+                    <p class="text-gray-600">Apesar da variabilidade, os tickets médios por pedido podem ser substanciais. Cada lead qualificado representa uma oportunidade de receita significativa.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="solution" class="mb-16">
+            <h2 class="section-title">A Solução: Geração de Leads Especializada</h2>
+            <p class="section-subtitle">Um serviço focado em geração de leads pode preencher a lacuna digital, conectando PMEs de caldeiraria a clientes de alto valor através de estratégias de marketing digital comprovadas e eficientes.</p>
+            <div class="card">
+                <h3 class="text-2xl font-semibold mb-6 text-center text-[#14B8A6]">Pilares do Serviço para Crescimento Contínuo</h3>
+                <div class="grid grid-cols-1 md:grid-cols-5 items-center gap-4 md:gap-0">
+                    <div class="flowchart-step"><span class="text-3xl mb-2">📝</span>Conteúdo de Qualidade (SEO)</div>
+                    <div class="flowchart-arrow hidden md:block">➡️</div>
+                    <div class="flowchart-step"><span class="text-3xl mb-2">🎯</span>Google Ads Estratégico</div>
+                    <div class="flowchart-arrow hidden md:block">➡️</div>
+                    <div class="flowchart-step"><span class="text-3xl mb-2">📋</span>Captação Eficiente de Leads (Formulários Online)</div>
+                </div>
+                <div class="text-center my-4 md:my-6">
+                    <div class="flowchart-arrow text-4xl transform md:rotate-90">⬇️</div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="flowchart-step p-6 bg-green-100 border-green-500"><span class="text-3xl mb-2">📈</span>Leads Qualificados Entregues</div>
+                    <div class="flowchart-step p-6 bg-yellow-100 border-yellow-500"><span class="text-3xl mb-2">🚀</span>Crescimento e ROI para PMEs de Caldeiraria</div>
+                </div>
+                <p class="mt-6 text-center text-gray-600">Nosso serviço combina estratégias digitais comprovadas para fornecer um fluxo consistente de leads qualificados, impulsionando o crescimento e o retorno sobre o investimento para sua empresa.</p>
+            </div>
+        </section>
+
+        <section id="proven-strategies" class="mb-16">
+            <h2 class="section-title">Estratégias Comprovadas no Mercado B2B</h2>
+            <p class="section-subtitle">Aproveitando o marketing digital B2B eficaz, que já demonstra resultados positivos no setor industrial brasileiro, para conectar sua caldeiraria com as oportunidades certas.</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="card text-center p-8">
+                    <p class="text-gray-500 mb-1 text-lg">Taxa de Conversão Mediana de Leads (Indústria e Manufatura)</p>
+                    <div class="stat-big-number text-[#14B8A6]">3.81%</div>
+                    <p class="text-gray-600 mt-2">Este índice, acima da média geral do mercado, sinaliza forte potencial para estratégias de geração de leads bem executadas no setor.</p>
+                </div>
+                <div class="card text-center p-8">
+                    <p class="text-gray-500 mb-1 text-lg">Empresas B2B Brasileiras que Utilizam Marketing Digital</p>
+                    <div class="stat-big-number text-[#14B8A6]">~80%</div>
+                    <p class="text-gray-600 mt-2">Adoção generalizada de táticas digitais para gerar oportunidades de negócios, destacando a importância de uma presença online robusta.</p>
+                </div>
+            </div>
+            <p class="mt-8 text-center text-lg text-gray-700">Marketing de conteúdo, SEO e publicidade paga direcionada são fundamentais para atrair e converter clientes industriais, estabelecendo autoridade e visibilidade no mercado.</p>
+        </section>
+
+        <section id="cta" class="text-center py-12 bg-gray-100 rounded-lg">
+            <h2 class="section-title">Seja Nosso Parceiro de Crescimento</h2>
+            <p class="section-subtitle">Concentre-se no que você faz de melhor – caldeiraria de precisão – enquanto nós cuidamos de trazer os clientes até você. Maximize seu ROI com leads qualificados e veja seu negócio prosperar.</p>
+            
+            <div class="max-w-2xl mx-auto mb-8">
+                <h3 class="text-xl font-semibold mb-4 text-[#0A74DA]">Benefícios Chave da Parceria:</h3>
+                <ul class="list-disc list-inside text-left space-y-2 text-gray-700 text-lg inline-block">
+                    <li>Aumento de Leads de Vendas Qualificados</li>
+                    <li>Visibilidade Online e Presença de Marca Aprimoradas</li>
+                    <li>Melhoria do ROI em Investimentos de Marketing</li>
+                    <li>Mitigação da Sazonalidade com Fluxo de Leads Consistente</li>
+                    <li>Acesso a Expertise em Marketing Digital Industrial</li>
+                </ul>
+            </div>
+
+            <a href="#contact-form-placeholder" class="primary-button text-lg">Eleve Seu Negócio de Caldeiraria. Descubra Nossas Soluções!</a>
+            <p class="mt-4 text-sm text-gray-500">Invista no futuro da sua empresa. Vamos conversar sobre como podemos ajudar.</p>
+        </section>
+    </main>
+
+    <footer class="text-center py-8 border-t border-gray-200">
+        <p class="text-gray-500">&copy; 2025 Análise Estratégica de Caldeiraria Industrial. Todos os direitos reservados.</p>
+        <p class="text-xs text-gray-400 mt-1">Infográfico baseado no relatório "Navegando pelo Cenário Brasileiro de Caldeiraria Industrial: Uma Análise Estratégica para Inovação de Serviços".</p>
+    </footer>
+
+    <script>
+        function wrapLabels(label, maxWidth) {
+            if (typeof label !== 'string' || label.length <= maxWidth) {
+                return label;
+            }
+            const words = label.split(' ');
+            const lines = [];
+            let currentLine = '';
+            for (const word of words) {
+                if ((currentLine + word).length > maxWidth && currentLine.length > 0) {
+                    lines.push(currentLine.trim());
+                    currentLine = word + ' ';
+                } else {
+                    currentLine += word + ' ';
+                }
+            }
+            lines.push(currentLine.trim());
+            return lines;
+        }
+
+        const commonChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: {
+                        font: {
+                            size: 12,
+                            family: 'Inter'
+                        }
+                    }
+                },
+                tooltip: {
+                    backgroundColor: 'rgba(0,0,0,0.7)',
+                    titleFont: { size: 14, family: 'Inter' },
+                    bodyFont: { size: 12, family: 'Inter' },
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            const item = tooltipItems[0];
+                            let label = item.chart.data.labels[item.dataIndex];
+                            if (Array.isArray(label)) {
+                              return label.join(' ');
+                            } else {
+                              return label;
+                            }
+                        }
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        font: { size: 11, family: 'Inter' },
+                        color: '#4B5563',
+                        callback: function(value, index, values) {
+                            const label = this.getLabelForValue(value);
+                             return wrapLabels(label, 10); // Shorter wrap for axis ticks
+                        }
+                    },
+                    grid: { display: false }
+                },
+                y: {
+                    ticks: {
+                        font: { size: 11, family: 'Inter' },
+                        color: '#4B5563',
+                    },
+                    grid: { color: '#E5E7EB' } // light gray grid lines
+                }
+            }
+        };
+        
+        // Chart 1: Key Client Industries
+        const clientIndustriesCtx = document.getElementById('clientIndustriesChart');
+        if (clientIndustriesCtx) {
+            const clientIndustriesData = {
+                labels: [
+                    wrapLabels('Energia (Hidro, Eólica)', 16), 
+                    wrapLabels('Óleo & Gás / Petroquímica', 16),
+                    wrapLabels('Mineração', 16),
+                    wrapLabels('Papel & Celulose', 16),
+                    wrapLabels('Siderúrgica (Aço)', 16),
+                    wrapLabels('Automotiva', 16),
+                    wrapLabels('Agronegócio & Alimentos', 16),
+                    wrapLabels('Construção & Infraestrutura', 16)
+                ],
+                datasets: [{
+                    label: 'Importância Relativa da Demanda (Ilustrativo)',
+                    data: [90, 95, 85, 75, 80, 70, 88, 78], // Illustrative values
+                    backgroundColor: [
+                        '#0A74DA', '#14B8A6', '#F59E0B', '#6366F1', 
+                        '#EC4899', '#84CC16', '#10B981', '#D946EF'
+                    ], // Using the defined chart colors
+                    borderColor: '#FFFFFF',
+                    borderWidth: 1,
+                    borderRadius: 4,
+                }]
+            };
+            new Chart(clientIndustriesCtx, {
+                type: 'bar', // Changed to 'bar' for horizontal, or use 'bar' with indexAxis: 'y'
+                data: clientIndustriesData,
+                options: {
+                    ...commonChartOptions,
+                    indexAxis: 'y', // Makes it a horizontal bar chart
+                    scales: {
+                        x: {
+                            ...commonChartOptions.scales.x,
+                            title: { display: true, text: 'Nível de Demanda Ilustrativo', font: {size: 12, family: 'Inter'} },
+                             ticks: {
+                                callback: function(value) { return value; } // No label wrapping for x-axis values
+                            }
+                        },
+                        y: {
+                            ...commonChartOptions.scales.y,
+                             ticks: {
+                                ...commonChartOptions.scales.y.ticks,
+                                autoSkip: false // Ensure all labels are shown
+                            }
+                        }
+                    },
+                    plugins: {
+                        ...commonChartOptions.plugins,
+                        legend: { display: false } // Often better to hide legend for single dataset bar charts
+                    }
+                }
+            });
+        } else {
+            // console.error("Element with ID 'clientIndustriesChart' not found.");
+        }
+    </script>
+</body>
+</html>
